@@ -12,6 +12,7 @@ When starting a mission, a cooldown of 72000 seconds (can be changed in config) 
 
 #### How to use
 `Download the script`
+`Run the SQL file`
 `Run the script`
 `Customize the script inside of Config.lua `
 
