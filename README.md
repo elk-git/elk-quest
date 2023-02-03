@@ -20,6 +20,7 @@ When starting a mission, a cooldown of 72000 seconds (can be changed in config) 
 Right now this script depends on some scripts, in the future i would like to make this standalone.
 QRCore
 QRTarget (meta_target)
+QRNotify
 You need to have MySQL for the cooldown to work.
 
 ##### Disclaimer
