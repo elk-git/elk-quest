@@ -1,5 +1,5 @@
 # elk-quest
-![elk-quest]([http://url/to/img.png](https://cdn.discordapp.com/attachments/919337262829936691/1071208818450640947/ELK-QUEST.png))
+![elk-quest](https://cdn.discordapp.com/attachments/919337262829936691/1071208818450640947/ELK-QUEST.png)
 A completly free RedM resource which creates a simple quest line. The script is fully customizable within the config.lua. The resource is simple, but my vision is to develop it furthermore in the future. It would be highly appreciated if you starred this repository and also gave me feedback and suggestions for further updates.
 
 
