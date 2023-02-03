@@ -9,7 +9,7 @@ local optionsReel = {
  
     {
         
-        label = "Starta uppdrag",
+        label = "Start quest",
     
         action = function()
             startMissionCheck()
@@ -51,7 +51,7 @@ CreateThread(function()
         local coordsOne = Citizen.InvokeNative(0x554D9D53F696D002, 1664425300, Config.QuestX, Config.QuestY, Config.QuestZ)
         SetBlipSprite(coordsOne, 1475879922, 1)
         SetBlipScale(coordsOne, 0.2)
-        Citizen.InvokeNative(0x9CB1A1623062F402, coordsOne, "Uppdrag")
+        Citizen.InvokeNative(0x9CB1A1623062F402, coordsOne, "Quest")
         Citizen.InvokeNative(0x662D364ABF16DE2F, coordsOne, 0x900A4D0A)
         print("Runs")
     end
@@ -66,7 +66,7 @@ CreateThread(function()
             setCoordsOne()
             startMission()
             else
-                QRCore.Functions.Notify("Du kan inte göra detta just nu", 'error')
+                QRCore.Functions.Notify("You can not do this right now", 'error')
             end
         end)
     end
@@ -83,11 +83,11 @@ CreateThread(function()
         --         'Skriv /avbrytuppdrag för att avbryta'), 0.85, 0.97, false)
             while missionOne == true do
                 DrawScreenText(string.format(
-                    'Uppdrag aktivt'), 0.85, 0.95, false, 204, 229, 255)
+                    'Mission active'), 0.85, 0.95, false, 204, 229, 255)
                 DrawScreenText(string.format(
-                    'Skriv /avbrytuppdrag för att avbryta'), 0.85, 0.965, false, 255,255,255)
+                    'write /endmission to end the mission'), 0.85, 0.965, false, 255,255,255)
                 DrawScreenText(string.format(
-                    'Ta dig till Emerald Station och leverera post åt mig'), 0.4, 0.95, false, 255,255,255)
+                    'Go to Emerald Station to deliver some packages'), 0.4, 0.95, false, 255,255,255)
                     Wait(0)
                 --local playerPossy = GetEntityCoords(PlayerPedId())
                 local ped = PlayerPedId()
@@ -95,7 +95,7 @@ CreateThread(function()
                 --local distanceText = GetDistanceBetweenCoords(playerPossy.x,playerPossy.y,playerPossy.z,1525.26, 442.36, 90.68)
                 local dist = #(pos - vector3(Config.QuestX, Config.QuestY, Config.QuestZ))
                 if dist <= 2 then
-                    DrawText3D(Config.QuestX, Config.QuestY, Config.QuestZ + 0.5, "Tryck E för att leverera posten", false)
+                    DrawText3D(Config.QuestX, Config.QuestY, Config.QuestZ + 0.5, "Press E to deliver the packages", false)
                    if IsControlJustPressed(0, 0x018C47CF) then
                     missionOne = false
                     missionTwo = true
@@ -103,7 +103,6 @@ CreateThread(function()
                     setCoordsTwo()
                     win = true
                     getBack()
-                    print("Done")
                    end
 
                 end
@@ -118,9 +117,8 @@ CreateThread(function()
         local coordsTwo = Citizen.InvokeNative(0x554D9D53F696D002, 1664425300, Config.PedX, Config.PedY, Config.PedZ)
         SetBlipSprite(coordsTwo, 1475879922, 1)
         SetBlipScale(coordsTwo, 0.2)
-        Citizen.InvokeNative(0x9CB1A1623062F402, coordsTwo, "Uppdrag")
+        Citizen.InvokeNative(0x9CB1A1623062F402, coordsTwo, "Quest")
         Citizen.InvokeNative(0x662D364ABF16DE2F, coordsTwo, 0x900A4D0A)
-        print("Runs")
     end
 
     function getBack()
@@ -131,14 +129,14 @@ CreateThread(function()
                         optionsReel = {
                     {
                         
-                        label = "Ta emot belöning",
+                        label = "Get your reward",
                     
                         action = function()
                             if win == true then
                                 win = false
                               endMission()
                             else
-                                QRCore.Functions.Notify("Du har inte utfört uppdraget", 'error')
+                                QRCore.Functions.Notify("You have not completed the mission", 'error')
                             end
                         end
                     }
@@ -153,11 +151,11 @@ CreateThread(function()
 
         while missionTwo == true do
             DrawScreenText(string.format(
-                'Uppdrag aktivt'), 0.85, 0.95, false, 204, 229, 255)
+                'Quest active'), 0.85, 0.95, false, 204, 229, 255)
             DrawScreenText(string.format(
-                'Skriv /avbrytuppdrag för att avbryta'), 0.85, 0.965, false, 255,255,255)
+                'Write /endmission to end the mission'), 0.85, 0.965, false, 255,255,255)
             DrawScreenText(string.format(
-                'Ta dig tillbaka till Jones'), 0.4, 0.95, false, 255,255,255)
+                'Take yourself back to Jones'), 0.4, 0.95, false, 255,255,255)
                 Wait(0)
         end
     end
@@ -171,8 +169,8 @@ CreateThread(function()
         local cash = math.random(Config.minReward,Config.maxReward)
         Citizen.InvokeNative(0xB059D7BD3D78C16F, coordsTwo, 0x900A4D0A)
         TriggerServerEvent("elkq:server:questDone", cash)
-        QRCore.Functions.Notify("Du klarade uppdraget", 'succes')
-        QRCore.Functions.Notify('Du fick ' .. cash .. 'SEK för uppdraget', 'error')
+        QRCore.Functions.Notify("You passed the mission", 'succes')
+        QRCore.Functions.Notify('Your reward was ' .. cash .. 'dollars', 'error')
         print("Mission Success")
         exports['qr-target']:RemoveTargetEntity(npc, {
             options = optionsReel,
@@ -226,7 +224,7 @@ CreateThread(function()
     end
 
     RegisterCommand(
-        "avbrytuppdrag",
+        "endmission",
         function()
            activeUppdrag = false
            missionOne = false
@@ -235,7 +233,6 @@ CreateThread(function()
            RemoveBlip(coordsOne)
            Citizen.InvokeNative(0xB059D7BD3D78C16F, coordsTwo, 0x900A4D0A)
            RemoveBlip(coordsTwo)
-           print("Abort")
         end,
         false
     )
