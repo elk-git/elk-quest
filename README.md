@@ -32,4 +32,6 @@ Any customizations from this script MUST be free to use, they cannot be sold. An
 Any feedback and suggestions is highly appreciated. Please raise them here on github issues. My plan is to further develop this script.
 If you use an Redm Framework which is not working with this script, please tell me which framework so i can furthermore develop this script to support that framework.
 
+Thanks
+
 
