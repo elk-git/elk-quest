@@ -29,7 +29,7 @@ end
 end)
 
 
-QRCore.Functions.CreateCallback('elkq:server:questCheck', function(source, cb)
+QRCore.Functions.CreateCallback('elkq:server:questCheck', function(source, cb, cdt, cdm)
     local Player =  QRCore.Functions.GetPlayer(source)
     local result = MySQL.scalar.await('SELECT citizenid FROM `elk-quest` WHERE citizenid = ?', {Player.PlayerData.citizenid})
 
@@ -41,7 +41,7 @@ QRCore.Functions.CreateCallback('elkq:server:questCheck', function(source, cb)
 
     if  os.time() - time[1].timestamp  > Config.Cooldown then
     cb(true)
-    else cb(false)
+    else cb(false, math.floor(((time[1].timestamp + Config.Cooldown) - os.time() ) / 60 / 60), math.ceil(((((time[1].timestamp + Config.Cooldown) - os.time() ) / 60 / 60) - (math.floor(((time[1].timestamp + Config.Cooldown) - os.time() ) / 60 / 60))) * 60 ))
     end
 
 elseif not result then

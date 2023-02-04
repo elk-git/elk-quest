@@ -53,22 +53,20 @@ CreateThread(function()
         SetBlipScale(coordsOne, 0.2)
         Citizen.InvokeNative(0x9CB1A1623062F402, coordsOne, "Quest")
         Citizen.InvokeNative(0x662D364ABF16DE2F, coordsOne, 0x900A4D0A)
-        print("Runs")
     end
 
     function startMissionCheck()
-        QRCore.Functions.TriggerCallback('elkq:server:questCheck', function(cb)
-            print(cb)
+        QRCore.Functions.TriggerCallback('elkq:server:questCheck', function(cb, cdt, cdm)
             if cb then
                 activeUppdrag = true
                 missionOne = true
-                QRCore.Functions.Notify("Mission started", 'succes')
-                QRCore.Functions.Notify("Take yourself down to Emerald Station and deliver som packages.", 'succes')
+                QRCore.Functions.Notify("Mission started", 'success')
+                QRCore.Functions.Notify("Take yourself down to Emerald Station and deliver som packages.", 'success')
             TriggerServerEvent("elkq:server:questCooldownSet")
             setCoordsOne()
             startMission()
             else
-                QRCore.Functions.Notify("You can not do this right now", 'error')
+                QRCore.Functions.Notify("You can't do this now, wait " .. tostring(cdt) .. " hours and " .. tostring(cdm) .. " minutes", 'error')
             end
         end)
     end
@@ -103,7 +101,7 @@ CreateThread(function()
                     missionTwo = true
                     RemoveBlip(coordsOne)
                     setCoordsTwo()
-                    QRCore.Functions.Notify('Good job! Now take yourself back to Jones!', 'sucess')
+                    QRCore.Functions.Notify('Good job! Now take yourself back to Jones!', 'success')
                     win = true
                     getBack()
                    end
@@ -174,12 +172,10 @@ CreateThread(function()
         TriggerServerEvent("elkq:server:questDone", cash)
         QRCore.Functions.Notify("You passed the mission", 'succes')
         QRCore.Functions.Notify('Your reward was ' .. cash .. 'dollars', 'error')
-        print("Mission Success")
         exports['qr-target']:RemoveTargetEntity(npc, {
             options = optionsReel,
             distance = 2.5
         })
-        print(cash)
 
 
     end
