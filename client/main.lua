@@ -62,6 +62,8 @@ CreateThread(function()
             if cb then
                 activeUppdrag = true
                 missionOne = true
+                QRCore.Functions.Notify("Mission started", 'succes')
+                QRCore.Functions.Notify("Take yourself down to Emerald Station and deliver som packages.", 'succes')
             TriggerServerEvent("elkq:server:questCooldownSet")
             setCoordsOne()
             startMission()
