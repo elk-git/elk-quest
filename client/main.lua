@@ -101,6 +101,7 @@ CreateThread(function()
                     missionTwo = true
                     RemoveBlip(coordsOne)
                     setCoordsTwo()
+                    QRCore.Functions.Notify('Good job! Now take yourself back to Jones!', 'sucess')
                     win = true
                     getBack()
                    end
@@ -233,6 +234,7 @@ CreateThread(function()
            RemoveBlip(coordsOne)
            Citizen.InvokeNative(0xB059D7BD3D78C16F, coordsTwo, 0x900A4D0A)
            RemoveBlip(coordsTwo)
+           QRCore.Functions.Notify('You have ended the mission', 'error')
         end,
         false
     )
