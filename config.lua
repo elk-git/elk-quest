@@ -1,5 +1,7 @@
 Config = {}
 
+-- Change the script language in the fxmanifest
+
 
 Config.Ped = "CS_CAJUN"
 

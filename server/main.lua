@@ -33,6 +33,9 @@ QRCore.Functions.CreateCallback('elkq:server:questCheck', function(source, cb, c
     local Player =  QRCore.Functions.GetPlayer(source)
     local result = MySQL.scalar.await('SELECT citizenid FROM `elk-quest` WHERE citizenid = ?', {Player.PlayerData.citizenid})
 
+   -- avrundade timmar är math.floor(((time[1].timestamp + Config.Cooldown) - os.time() ) / 60 / 60)
+   -- icke avrundande timmar är ((time[1].timestamp + Config.Cooldown) - os.time() ) / 60 / 60
+
     if result then
    local time =  MySQL.Sync.fetchAll(
     'SELECT timestamp FROM `elk-quest` WHERE citizenid = ?',
@@ -41,11 +44,13 @@ QRCore.Functions.CreateCallback('elkq:server:questCheck', function(source, cb, c
 
     if  os.time() - time[1].timestamp  > Config.Cooldown then
     cb(true)
-    else cb(false, math.floor(((time[1].timestamp + Config.Cooldown) - os.time() ) / 60 / 60), math.ceil(((((time[1].timestamp + Config.Cooldown) - os.time() ) / 60 / 60) - (math.floor(((time[1].timestamp + Config.Cooldown) - os.time() ) / 60 / 60))) * 60 ))
+    else  cb(false, math.floor(((time[1].timestamp + Config.Cooldown) - os.time() ) / 60 / 60), math.ceil(((((time[1].timestamp + Config.Cooldown) - os.time() ) / 60 / 60) - (math.floor(((time[1].timestamp + Config.Cooldown) - os.time() ) / 60 / 60))) * 60 ))
+        
+        
     end
 
-elseif not result then
+    elseif not result then
     cb(true)
-end
+    end
 
 end)
