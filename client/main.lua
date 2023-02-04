@@ -32,7 +32,7 @@ CreateThread(function()
         RequestModel(model)
         Wait(10)
     end
-    local npc = CreatePed(model, Config.PedX -28 , Config.PedY, Config.PedZ - 1 , Config.PedHeading, true, true, 0, 0)
+    local npc = CreatePed(model, Config.PedX , Config.PedY, Config.PedZ - 1 , Config.PedHeading, true, true, 0, 0)
     -- -366.77,
     while not DoesEntityExist(npc) do Wait(300) end
     Citizen.InvokeNative(0x283978A15512B2FE, npc, true)
