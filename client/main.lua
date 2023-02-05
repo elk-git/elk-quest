@@ -24,8 +24,10 @@ local optionsReel = {
     
 
 }
-
+-- Get ped from config
 local model = GetHashKey(Config.Ped)
+
+-- Create ped on map
 
 CreateThread(function()
     while (not HasModelLoaded(model)) do
@@ -47,6 +49,8 @@ CreateThread(function()
         distance = 2.5
     })
 
+    -- Set gps for part 1
+
     function setCoordsOne()
         local coordsOne = Citizen.InvokeNative(0x554D9D53F696D002, 1664425300, Config.QuestX, Config.QuestY, Config.QuestZ)
         SetBlipSprite(coordsOne, 1475879922, 1)
@@ -56,6 +60,8 @@ CreateThread(function()
 
 
     end
+
+    -- Cooldown check 
 
     function startMissionCheck()
         QRCore.Functions.TriggerCallback('elkq:server:questCheck', function(cb, cdt, cdm)
@@ -76,7 +82,7 @@ CreateThread(function()
 
     
 
-        
+        -- Starting mission
 
      function startMission() 
         --     while activeUppdrag == true do
@@ -93,6 +99,11 @@ CreateThread(function()
                     Lang:t('missionemerald1')), 0.4, 0.95, false, 255,255,255)
                     Wait(0)
                 --local playerPossy = GetEntityCoords(PlayerPedId())
+
+                -- 3d text on letdown
+
+
+
                 local ped = PlayerPedId()
                 local pos = GetEntityCoords(ped)
                 --local distanceText = GetDistanceBetweenCoords(playerPossy.x,playerPossy.y,playerPossy.z,1525.26, 442.36, 90.68)
@@ -117,6 +128,8 @@ CreateThread(function()
 
     end
 
+    -- Set gps part 2
+
     function setCoordsTwo()
         local coordsTwo = Citizen.InvokeNative(0x554D9D53F696D002, 1664425300, Config.PedX, Config.PedY, Config.PedZ)
         SetBlipSprite(coordsTwo, 1475879922, 1)
@@ -124,6 +137,8 @@ CreateThread(function()
         Citizen.InvokeNative(0x9CB1A1623062F402, coordsTwo, Lang:t('mission'))
         Citizen.InvokeNative(0x662D364ABF16DE2F, coordsTwo, 0x900A4D0A)
     end
+
+    -- Add get reward to target after part 1 is done
 
     function getBack()
         exports['qr-target']:RemoveTargetEntity(npc, {
@@ -164,6 +179,8 @@ CreateThread(function()
         end
     end
 
+    -- ending mission. 
+
     function endMission()
 
         missionTwo = false
@@ -182,6 +199,8 @@ CreateThread(function()
 
 
     end
+
+    -- function for 3dtext
 
      function DrawText3D(x, y, z, text, custom)
         local onScreen, _x, _y = GetScreenCoordFromWorldCoord(x, y, z)
@@ -225,8 +244,10 @@ CreateThread(function()
         DisplayText(CreateVarString(10, "LITERAL_STRING", text), x, y)
     end
 
+    -- command for ending mission.
+
     RegisterCommand(
-        "avbrytuppdrag",
+        "endmission",
         function()
            activeUppdrag = false
            missionOne = false
