@@ -3,7 +3,7 @@
 A completly free RedM resource which creates a simple quest line. The script is fully customizable within the config.lua. The resource is simple, but my vision is to develop it furthermore in the future. It would be highly appreciated if you starred this repository and also gave me feedback and suggestions for further updates.
 
 
-Watch a preview of the script [HERE](https://streamable.com/0smkfo).
+Watch a preview of the script [HERE](https://streamable.com/wnj7gf).
 
 
 #### The Script in explaination
